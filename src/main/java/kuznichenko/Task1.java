@@ -17,31 +17,39 @@ public class Task1 {
 
 
     public static void main(String[] args) throws InterruptedException {
-
-        String[] array = new String[100_000_000];
-
-        SetArray setArray1 = new SetArray(array, 0, 33_333_333);
-        SetArray setArray2 = new SetArray(array, 33_333_333, 66_666_666);
-        SetArray setArray3 = new SetArray(array, 66_666_666, 99_999_999);
-
-        SetArray[] setArrays = new SetArray[]{setArray1, setArray2, setArray3};
+        long start = System.currentTimeMillis();
         List<Thread> threadList = new ArrayList<>();
-
+        String[] array = new String[100_000_000];
         int i = 0;
-        for (SetArray setArray : setArrays) {
-            i++;
+        int y = array.length/5;
+//        SetArray setArray0 = new SetArray(array, 0 , 19_999_999);
+//        SetArray setArray1 = new SetArray(array, 20_000_000 , 39_999_999);
+//        SetArray setArray2 = new SetArray(array, 40_000_000 , 59_999_999);
+//        SetArray setArray3 = new SetArray(array, 60_000_000 , 79_999_999);
+//        SetArray setArray4 = new SetArray(array, 80_000_000 , 99_999_999);
+        List<SetArray> setArrays = new ArrayList<>();
+        for (SetArray setArray: setArrays) {
+            setArrays.add(new SetArray(array, i, y));
+            i = y;
+            y = y + y;
+        }
+        for (SetArray setArray: setArrays) {
+            int z = 0;
+            z++;
 
-            Thread thread = new Thread(setArray, String.valueOf(i));
+            Thread thread = new Thread( setArray, String.valueOf(i));
 
             thread.start();
 
             threadList.add(thread);
-        }
 
+        }
         for(Thread thread : threadList){
             thread.join();
         }
 
+        long finish = System.currentTimeMillis();
+        System.out.println(finish-start);
 
     }
 

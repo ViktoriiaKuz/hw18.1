@@ -17,7 +17,7 @@ public class SetArray implements Runnable  {
 
     @Override
     public void run() {
-        long start = System.currentTimeMillis();
+
         for (int i = from; i < to; i++) {
                 if (i % 3 == 0) {
                     array[i] = "Fizz";
@@ -26,11 +26,10 @@ public class SetArray implements Runnable  {
                 } else {
                     array[i] = String.valueOf(i);
                 }
-               // System.out.println(array[i] + Thread.currentThread());
+                //System.out.println(array[i] + Thread.currentThread());
             }
         //System.out.println(Arrays.toString(array));
-        long finish = System.currentTimeMillis();
-        System.out.println(finish-start);
+
         }
 
 }
