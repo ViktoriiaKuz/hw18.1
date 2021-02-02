@@ -26,7 +26,7 @@ public class SetArray implements Runnable  {
                 } else {
                     array[i] = String.valueOf(i);
                 }
-                //System.out.println(array[i] + Thread.currentThread());
+                System.out.println(array[i] + Thread.currentThread());
             }
         //System.out.println(Arrays.toString(array));
 
