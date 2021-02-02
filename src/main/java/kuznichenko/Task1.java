@@ -1,6 +1,9 @@
 package kuznichenko;
 
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * С помощью многопоточности заполнить массива строк из 100 млн элементов.
@@ -22,6 +25,7 @@ public class Task1 {
         SetArray setArray3 = new SetArray(array, 66_666_666, 99_999_999);
 
         SetArray[] setArrays = new SetArray[]{setArray1, setArray2, setArray3};
+        List<Thread> threadList = new ArrayList<>();
 
         int i = 0;
         for (SetArray setArray : setArrays) {
@@ -30,8 +34,12 @@ public class Task1 {
             Thread thread = new Thread(setArray, String.valueOf(i));
 
             thread.start();
-            thread.join();
 
+            threadList.add(thread);
+        }
+
+        for(Thread thread : threadList){
+            thread.join();
         }
 
 
