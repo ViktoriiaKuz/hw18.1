@@ -21,23 +21,21 @@ public class Task1 {
         List<Thread> threadList = new ArrayList<>();
         String[] array = new String[100_000_000];
         int i = 0;
-        int y = array.length/5;
-//        SetArray setArray0 = new SetArray(array, 0 , 19_999_999);
-//        SetArray setArray1 = new SetArray(array, 20_000_000 , 39_999_999);
-//        SetArray setArray2 = new SetArray(array, 40_000_000 , 59_999_999);
-//        SetArray setArray3 = new SetArray(array, 60_000_000 , 79_999_999);
-//        SetArray setArray4 = new SetArray(array, 80_000_000 , 99_999_999);
+        int y = (array.length/5)-1;
+
         List<SetArray> setArrays = new ArrayList<>();
-        for (SetArray setArray: setArrays) {
+
+        for (int a = 0; a < 3; a++) {
             setArrays.add(new SetArray(array, i, y));
-            i = y;
-            y = y + y;
+            i = y+1;
+            y = (y*2)+1;
         }
+        int z = 0;
         for (SetArray setArray: setArrays) {
-            int z = 0;
+
             z++;
 
-            Thread thread = new Thread( setArray, String.valueOf(i));
+            Thread thread = new Thread( setArray, String.valueOf(z));
 
             thread.start();
 
